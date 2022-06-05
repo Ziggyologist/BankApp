@@ -1,5 +1,16 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300;400;500;600;900&display=swap");
 
+:root {
+  --dark-primary-color: #00796b;
+  --default-primary-color: #009688;
+  --light-primary-color: #b2dfdb;
+  --text-primary-color: #ffffff;
+  --accent-color: #ffc107;
+  --primary-text-color: #212121;
+  --secondary-text-color: #757575;
+  --divider-color: #bdbdbd;
+}
+
 * {
   padding: 0;
   margin: 0;
@@ -7,7 +18,7 @@
 }
 
 body {
-  background-color: #bdbdbd;
+  background-color: var(--divider-color);
   font-family: "Montserrat", sans-serif;
   font-weight: 500;
   color: #212121;
@@ -20,7 +31,7 @@ header {
   height: 50px;
   align-items: center;
   font-size: 1.2rem;
-  border-bottom: #009688 2px solid;
+  border-bottom: var(--default-primary-color) 2px solid;
 }
 
 .greeting {
@@ -62,7 +73,7 @@ header {
   font-size: 1rem;
 }
 .login_form input:focus {
-  border: 2px #757575 solid;
+  border: 2px var(--secondary-text-color) solid;
   outline: none;
 }
 
