@@ -8,7 +8,8 @@
   --accent-color: #ffc107;
   --primary-text-color: #212121;
   --secondary-text-color: #757575;
-  --divider-color: #bdbdbd;
+  --divider-color: #dfdfdf;
+  --contrast-color: #963100;
 }
 
 * {
@@ -21,7 +22,7 @@ body {
   background-color: var(--divider-color);
   font-family: "Montserrat", sans-serif;
   font-weight: 500;
-  color: #212121;
+  color: var(--primary-text-color);
 }
 
 header {
@@ -117,12 +118,6 @@ main {
   margin: 2rem auto;
 }
 
-.transactions {
-  height: 55vh;
-  border: red 2px solid;
-  width: 60%;
-}
-
 .operations {
   height: 55vh;
   border: orange 2px solid;
@@ -136,4 +131,94 @@ summary {
 
 details p {
   margin-left: 45px;
+}
+
+.info_balance {
+  display: flex;
+  /* border: yellow 2px solid; */
+  margin: 0 auto;
+  gap: 5vw;
+  max-width: 1000px;
+  align-items: baseline;
+}
+.info_balance div {
+  /* border: 2px black solid; */
+}
+
+.timer {
+  flex-grow: 1;
+  text-align: right;
+}
+
+.deposits_total {
+  color: var(--dark-primary-color);
+  font-size: 1.5rem;
+}
+
+.withdrawals_total {
+  color: var(--contrast-color);
+  font-size: 1.5rem;
+}
+
+/* .sort {
+  border: pink solid 2px;
+} */
+
+.sort button {
+  padding: 0.8rem 1.5rem;
+  background-color: var(--accent-color);
+  border: none;
+  border-radius: 1.2rem;
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+.sort button:hover {
+  background-color: #c59811;
+  cursor: pointer;
+}
+
+.sort button:active {
+  background-color: var(--default-primary-color);
+}
+
+.transactions {
+  height: 55vh;
+  /* border: red 2px solid; */
+  width: 60%;
+  overflow: auto;
+}
+
+.transaction_row {
+  /* border: 2px blue solid; */
+  display: flex;
+  justify-content: space-between;
+  margin: 0.5rem;
+  padding: 1rem;
+  background-color: var(--text-primary-color);
+}
+
+.transaction_type {
+  /* border: 2px pink solid; */
+  border-radius: 2rem;
+  padding: 0.3rem;
+  font-size: 0.8rem;
+}
+
+/* .transaction_amount {
+  border: orange solid 2px;
+} */
+
+.widthdrawal_style {
+  background: #963100;
+  background: -webkit-radial-gradient(top, #963100, #fe9562);
+  background: -moz-radial-gradient(top, #963100, #fe9562);
+  background: radial-gradient(to bottom, #963100, #fe9562);
+}
+
+.deposit_style {
+  background: #009689;
+  background: -webkit-radial-gradient(top, #009689, #b2dfdb);
+  background: -moz-radial-gradient(top, #009689, #b2dfdb);
+  background: radial-gradient(to bottom, #009689, #b2dfdb);
 }
