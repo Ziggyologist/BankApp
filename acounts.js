@@ -1,5 +1,5 @@
 const acc1 = {
-  name: "Teodora",
+  name: "Raluca",
   surname: "Ralucea",
   username: "teo",
   password: "covor",
@@ -8,11 +8,11 @@ const acc1 = {
 };
 
 const acc2 = {
-  name: "Erik",
-  surname: "Sfecla",
-  username: "erik",
-  password: "1234",
-  transactions: [1810, -220, -123, -585, -555, 100, -600],
+  name: "Roxana",
+  surname: "Loxana",
+  username: "roxi",
+  password: "Moxi",
+  transactions: [1810, -220, -123, -585, -555, 100, -2600],
   currency: "€",
 };
 
