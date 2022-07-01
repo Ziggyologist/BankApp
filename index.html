@@ -9,13 +9,19 @@
   <body>
     <header>
       <div class="greeting">
-        <p>Welcome back, Teo</p>
+        <p>Welcome back, <span class="user_greeting">User</span>!</p>
       </div>
       <div class="logo">logo</div>
       <div class="login">
         <form class="login_form">
-          <input type="text" placeholder="user" requiered />
-          <input type="password" placeholder="PIN" maxlength="4" requiered />
+          <input class="login_name" type="text" placeholder="user" requiered />
+          <input
+            class="login_password"
+            type="password"
+            placeholder="PIN"
+            maxlength="8"
+            requiered
+          />
           <a href="#">
             <button class="submit_btn" type="submit">
               <svg
@@ -39,8 +45,6 @@
 
     <div class="balance">
       <div class="balance_text">
-        <!-- <h1>Current balance</h1>
-        <p>As of Sun, May, 22</p> -->
         <details>
           <p>As of Sun, May, 22</p>
           <summary>Current balance</summary>
@@ -130,4 +134,6 @@
       <div class="operations"></div>
     </main>
   </body>
+  <script src="acounts.js"></script>
+  <script src="script.js"></script>
 </html>

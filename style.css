@@ -9,7 +9,7 @@
   --primary-text-color: #212121;
   --secondary-text-color: #757575;
   --divider-color: #dfdfdf;
-  --contrast-color: #963100;
+  --contrast-color: #ff5549;
 }
 
 * {
@@ -33,6 +33,7 @@ header {
   align-items: center;
   font-size: 1.2rem;
   border-bottom: var(--default-primary-color) 2px solid;
+  margin-bottom: 5vh;
 }
 
 .greeting {
@@ -106,6 +107,7 @@ header {
   /* border: 2px #ffc107 dashed; */
   max-width: 1000px;
   margin: 12px auto;
+  margin-bottom: 5vh;
 }
 .balance_total {
   font-size: 2rem;
@@ -210,15 +212,19 @@ details p {
 } */
 
 .widthdrawal_style {
-  background: #963100;
-  background: -webkit-radial-gradient(top, #963100, #fe9562);
+  background: var(--contrast-color);
+  /* background: -webkit-radial-gradient(top, #963100, #fe9562);
   background: -moz-radial-gradient(top, #963100, #fe9562);
-  background: radial-gradient(to bottom, #963100, #fe9562);
+  background: radial-gradient(to bottom, #963100, #fe9562); */
 }
 
 .deposit_style {
-  background: #009689;
-  background: -webkit-radial-gradient(top, #009689, #b2dfdb);
+  background: var(--default-primary-color);
+  /* background: -webkit-radial-gradient(top, #009689, #b2dfdb);
   background: -moz-radial-gradient(top, #009689, #b2dfdb);
-  background: radial-gradient(to bottom, #009689, #b2dfdb);
+  background: radial-gradient(to bottom, #009689, #b2dfdb); */
+}
+
+.hidden {
+  opacity: 0;
 }
