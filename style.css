@@ -143,9 +143,6 @@ details p {
   max-width: 1000px;
   align-items: baseline;
 }
-.info_balance div {
-  /* border: 2px black solid; */
-}
 
 .timer {
   flex-grow: 1;
@@ -227,4 +224,18 @@ details p {
 
 .hidden {
   opacity: 0;
+}
+
+.logout_btn {
+  background-color: white;
+  border: none;
+  border-radius: 20px;
+  padding: 3px 15px;
+  width: 105px;
+}
+
+.logout_btn:hover {
+  border: 2px var(--secondary-text-color) solid;
+  outline: none;
+  cursor: pointer;
 }

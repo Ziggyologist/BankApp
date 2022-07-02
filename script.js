@@ -8,6 +8,9 @@ const curBalance = document.querySelector(".balance_total");
 const displayDeposits = document.querySelector(".deposits_total");
 const displayWithdrawals = document.querySelector(".withdrawals_total");
 const transactionArea = document.querySelector(".transactions");
+const UIheader = document.querySelector(".balance");
+const UIheader2 = document.querySelector(".info_balance");
+const UImain = document.querySelector("main");
 
 // EMPTY FIELDS
 greetingPhrase.classList.add("hidden");
@@ -51,12 +54,50 @@ const displayTransactions = function (acc) {
         </div>`;
     transactionArea.insertAdjacentHTML("afterbegin", HTMLrow);
   });
+  greetingPhrase?.classList.remove("hidden");
+  transactionArea?.classList.remove("hidden");
+  UIheader?.classList.remove("hidden");
+  UIheader2?.classList.remove("hidden");
+  UImain?.classList.remove("hidden");
 };
+
+// LOG OUT
+let logoutBtn;
+const HTMLbtn = `<button class="logout_btn">Log out</button>`;
+document.querySelector(".login").insertAdjacentHTML("beforeend", HTMLbtn);
+document.querySelector(".logout_btn").classList.add("hidden");
+logoutBtn = document.querySelector(".logout_btn");
+
+const displayLogoutBtn = function (acc) {
+  if (currentAcc) {
+    document.querySelector(".login_form").classList.add("hidden");
+    logoutBtn.classList.remove("hidden");
+    // logoutBtn = document.querySelector(".logout_btn");
+  } else {
+    document.querySelector(".logout_btn").classList.add("hidden");
+    document.querySelector(".login_form").style.opacity = "0";
+  }
+};
+logoutBtn?.addEventListener("click", function (e) {
+  e.preventDefault();
+  document.querySelector(".logout_btn").classList.add("hidden");
+  document.querySelector(".login_form").style.opacity = "100";
+  currentAcc = 0;
+  console.log(currentAcc);
+  greetingPhrase.classList.add("hidden");
+  transactionArea.classList.add("hidden");
+  UIheader.classList.add("hidden");
+  UIheader2.classList.add("hidden");
+  UImain.classList.add("hidden");
+});
+
+// __________________________
 
 const updateUI = function (acc) {
   displayBalance(acc);
   displayActivities(acc);
   displayTransactions(acc);
+  displayLogoutBtn(acc);
 };
 
 // LOGIN IMPLEMENTATION
@@ -78,7 +119,8 @@ const login = function (e) {
     alert("The username or password you entered is invalid");
     greetingPhrase.classList.add("hidden");
   }
-
+  document.querySelector(".logout_btn").classList.remove("hidden");
+  document.querySelector(".login_form").style.opacity = "0";
   console.log(userLogin.value, passwordLogin.value);
 };
 
