@@ -5,6 +5,7 @@ const submitBtn = document.querySelector(".submit_btn");
 const userGreet = document.querySelector(".user_greeting");
 const greetingPhrase = document.querySelector(".greeting p");
 const curBalance = document.querySelector(".balance_total");
+const todayDate = document.querySelector(".today_date");
 const displayDeposits = document.querySelector(".deposits_total");
 const displayWithdrawals = document.querySelector(".withdrawals_total");
 const transactionArea = document.querySelector(".transactions");
@@ -12,53 +13,14 @@ const UIheader = document.querySelector(".balance");
 const UIheader2 = document.querySelector(".info_balance");
 const UImain = document.querySelector("main");
 
+const sortBtn = document.querySelector(".sort button");
+
 // EMPTY FIELDS
 greetingPhrase.classList.add("hidden");
 const emptyFields = function () {
   transactionArea.innerHTML = "";
   curBalance.textContent = "0";
   userGreet.textContent = "User";
-};
-
-const displayBalance = function (acc) {
-  const totalBalance = acc.transactions.reduce(
-    (transaction, cur) => cur + transaction,
-    0
-  );
-  curBalance.textContent = `${totalBalance}${acc.currency}`;
-  const totalDeposits = acc.transactions
-    .filter(transaction => transaction > 0)
-    .reduce((transaction, cur) => cur + transaction, 0);
-  displayDeposits.textContent = `${totalDeposits}${acc.currency}`;
-  const totalWithdrawals = acc.transactions
-    .filter(t => t < 0)
-    .reduce((t, cur) => cur + t, 0);
-  displayWithdrawals.textContent = `${Math.abs(totalWithdrawals)}${
-    acc.currency
-  }`;
-  if (totalDeposits < Math.abs(totalWithdrawals)) {
-    displayWithdrawals.textContent = `${Math.abs(totalWithdrawals)}${
-      acc.currency
-    }  ❗`;
-  }
-};
-
-const displayActivities = function (acc) {};
-
-const displayTransactions = function (acc) {
-  acc.transactions.forEach(transaction => {
-    const transactionType = transaction >= 0 ? "deposit" : "widthdrawal";
-    const HTMLrow = `<div class="transaction_row">
-          <div class="transaction_type ${transactionType}_style">${transactionType}</div>
-          <div class="transaction_amount">${transaction} ${acc.currency}</div>
-        </div>`;
-    transactionArea.insertAdjacentHTML("afterbegin", HTMLrow);
-  });
-  greetingPhrase?.classList.remove("hidden");
-  transactionArea?.classList.remove("hidden");
-  UIheader?.classList.remove("hidden");
-  UIheader2?.classList.remove("hidden");
-  UImain?.classList.remove("hidden");
 };
 
 // LOG OUT
@@ -91,6 +53,87 @@ logoutBtn?.addEventListener("click", function (e) {
   UImain.classList.add("hidden");
 });
 
+// --FORMAT DATES--
+const formatTransactionDate = function (date) {
+  const day = `${date.getDate()}`.padStart(2, 0);
+  const month = `${date.getMonth() + 1}`.padStart(2, 0);
+  const year = `${date.getFullYear()}`;
+  return `${day}/${month}/${year}`;
+};
+
+// ---DISPLAY BALANCE---
+const displayBalance = function (acc) {
+  const totalBalance = acc.transactions.reduce(
+    (transaction, cur) => cur + transaction,
+    0
+  );
+  curBalance.textContent = `${totalBalance}${acc.currency}`;
+  const totalDeposits = acc.transactions
+    .filter(transaction => transaction > 0)
+    .reduce((transaction, cur) => cur + transaction, 0);
+  displayDeposits.textContent = `${totalDeposits}${acc.currency}`;
+  const totalWithdrawals = acc.transactions
+    .filter(t => t < 0)
+    .reduce((t, cur) => cur + t, 0);
+  displayWithdrawals.textContent = `${Math.abs(totalWithdrawals)}${
+    acc.currency
+  }`;
+  if (totalDeposits < Math.abs(totalWithdrawals)) {
+    displayWithdrawals.textContent = `${Math.abs(totalWithdrawals)}${
+      acc.currency
+    }  ❗`;
+  }
+  const today = new Date();
+  const day = today.getDay();
+  const dateDay = today.getDate();
+  const month = today.toLocaleString("default", {
+    month: "long",
+  });
+  const [hours, minutes] = [today.getHours(), today.getMinutes()];
+
+  const formatDate = function (dayX) {
+    const week = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+    return week[dayX];
+  };
+  todayDate.innerHTML = `${formatDate(
+    day
+  )}, ${month} ${dateDay}, ${hours}:${minutes} `;
+};
+
+// --DISPLAY ACTIVITIES---
+
+const displayActivities = function (acc) {};
+
+const displayTransactions = function (acc, sort = false) {
+  transactionArea.innerHTML = "";
+  const sorted = sort
+    ? acc.transactions.slice().sort((a, b) => a - b)
+    : acc.transactions;
+
+  sorted.forEach((transaction, i) => {
+    const transactionType = transaction >= 0 ? "deposit" : "widthdrawal";
+    const date = new Date(acc.transactionDate[i]);
+    const displayDate = formatTransactionDate(date);
+    const HTMLrow = `<div class="transaction_row">
+          <div class="transaction_type ${transactionType}_style">${transactionType}</div>
+          <div class="transaction_date"> ${displayDate} </div>
+          <div class="transaction_amount">${transaction.toFixed(2)} ${
+      acc.currency
+    }</div>
+        </div>`;
+    transactionArea.insertAdjacentHTML("afterbegin", HTMLrow);
+  });
+  greetingPhrase?.classList.remove("hidden");
+  transactionArea?.classList.remove("hidden");
+  UIheader?.classList.remove("hidden");
+  UIheader2?.classList.remove("hidden");
+  UImain?.classList.remove("hidden");
+};
+
+// ---DISPLAY DATE---
+const displayDate = function () {
+  console.log("date is");
+};
 // __________________________
 
 const updateUI = function (acc) {
@@ -98,6 +141,7 @@ const updateUI = function (acc) {
   displayActivities(acc);
   displayTransactions(acc);
   displayLogoutBtn(acc);
+  displayDate();
 };
 
 // LOGIN IMPLEMENTATION
@@ -126,3 +170,11 @@ const login = function (e) {
 
 // Event handlers
 submitBtn.addEventListener("click", login);
+
+//
+let sorted = false;
+sortBtn.addEventListener("click", function (e) {
+  e.preventDefault();
+  displayTransactions(currentAcc, !sorted);
+  sorted = !sorted;
+});

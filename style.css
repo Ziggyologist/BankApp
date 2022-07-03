@@ -195,6 +195,17 @@ details p {
   margin: 0.5rem;
   padding: 1rem;
   background-color: var(--text-primary-color);
+  flex-grow: 1;
+}
+
+.transaction_date {
+  color: grey;
+  /* border: orange 1px solid; */
+  flex-grow: 10;
+  font-size: 0.5rem;
+  justify-self: center;
+  align-self: center;
+  padding-left: 1rem;
 }
 
 .transaction_type {
@@ -202,11 +213,9 @@ details p {
   border-radius: 2rem;
   padding: 0.3rem;
   font-size: 0.8rem;
+  flex-grow: 1;
+  text-align: center;
 }
-
-/* .transaction_amount {
-  border: orange solid 2px;
-} */
 
 .widthdrawal_style {
   background: var(--contrast-color);
