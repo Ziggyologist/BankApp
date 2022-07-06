@@ -74,4 +74,23 @@ const acc4 = {
   currency: "$",
 };
 
-const accounts = [acc1, acc2, acc3, acc4];
+const acc5 = {
+  name: "Erik",
+  surname: "Anrel",
+  username: "erik",
+  password: "123",
+  transactions: [510, -120, 23, -85, -8, 100, -100],
+  transactionDate: [
+    "2019-06-21T13:15:33.035Z",
+    "2020-03-23T07:42:02.383Z",
+    "2020-07-20T13:15:33.035Z",
+    "2020-10-01T10:17:24.185Z",
+    "2021-10-08T14:11:59.604Z",
+    "2021-02-27T17:01:17.194Z",
+    "2021-02-18T13:15:33.035Z",
+    "2022-02-12T10:51:36.790Z",
+  ],
+  currency: "€",
+};
+
+const accounts = [acc1, acc2, acc3, acc4, acc5];

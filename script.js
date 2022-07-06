@@ -14,6 +14,7 @@ const UIheader2 = document.querySelector(".info_balance");
 const UImain = document.querySelector("main");
 
 const sortBtn = document.querySelector(".sort button");
+const timer = document.querySelector(".timer_rundown");
 
 // EMPTY FIELDS
 greetingPhrase.classList.add("hidden");
@@ -40,7 +41,7 @@ const displayLogoutBtn = function (acc) {
     document.querySelector(".login_form").style.opacity = "0";
   }
 };
-logoutBtn?.addEventListener("click", function (e) {
+const logout = function (e) {
   e.preventDefault();
   document.querySelector(".logout_btn").classList.add("hidden");
   document.querySelector(".login_form").style.opacity = "100";
@@ -51,7 +52,9 @@ logoutBtn?.addEventListener("click", function (e) {
   UIheader.classList.add("hidden");
   UIheader2.classList.add("hidden");
   UImain.classList.add("hidden");
-});
+};
+
+logoutBtn?.addEventListener("click", logout);
 
 // --FORMAT DATES--
 const formatTransactionDate = function (date) {
@@ -59,6 +62,45 @@ const formatTransactionDate = function (date) {
   const month = `${date.getMonth() + 1}`.padStart(2, 0);
   const year = `${date.getFullYear()}`;
   return `${day}/${month}/${year}`;
+};
+
+// SET TIMEOUT
+let timerX;
+const startLogoutTimer = function () {
+  const tick = function () {
+    const min = String(Math.trunc(time / 60)).padStart(2, 0);
+    const sec = String(time % 60).padStart(2, 0);
+    timer.innerHTML = `${min}:${sec}`;
+
+    if (time === 0) {
+      setTimeout(function () {
+        greetingPhrase.innerHTML = "Please log in to get started";
+        timer.innerHTML = `00:00`;
+        document.querySelector(".logout_btn").classList.add("hidden");
+        document.querySelector(".login_form").style.opacity = "100";
+        currentAcc = 0;
+        greetingPhrase.classList.add("transAnimation");
+        greetingPhrase.classList.add("hidden");
+        transactionArea.classList.add("transAnimation");
+        transactionArea.classList.add("hidden");
+        UIheader.classList.add("transAnimation");
+        UIheader.classList.add("hidden");
+        UIheader2.classList.add("transAnimation");
+        UIheader2.classList.add("hidden");
+        UImain.classList.add("transAnimation");
+        UImain.classList.add("hidden");
+        userLogin.value = "";
+        passwordLogin.value = "";
+        clearInterval(timerX);
+        console.log(currentAcc);
+      }, 1000);
+    }
+    time--;
+  };
+  let time = 60;
+  tick();
+  const timerX = setInterval(tick, 1000);
+  return timerX;
 };
 
 // ---DISPLAY BALANCE---
@@ -89,10 +131,20 @@ const displayBalance = function (acc) {
   const month = today.toLocaleString("default", {
     month: "long",
   });
-  const [hours, minutes] = [today.getHours(), today.getMinutes()];
+  // const [hours, minutes] = [today.getHours(), today.getMinutes()];
+  const hours = `${today.getHours()}`.padStart(2, 0);
+  const minutes = `${today.getMinutes()}`.padStart(2, 0);
 
   const formatDate = function (dayX) {
-    const week = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+    const week = [
+      "Sunday",
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday",
+    ];
     return week[dayX];
   };
   todayDate.innerHTML = `${formatDate(
@@ -166,6 +218,8 @@ const login = function (e) {
   document.querySelector(".logout_btn").classList.remove("hidden");
   document.querySelector(".login_form").style.opacity = "0";
   console.log(userLogin.value, passwordLogin.value);
+  if (timerX) clearInterval(timerX);
+  timerX = startLogoutTimer();
 };
 
 // Event handlers
@@ -177,4 +231,6 @@ sortBtn.addEventListener("click", function (e) {
   e.preventDefault();
   displayTransactions(currentAcc, !sorted);
   sorted = !sorted;
+  if (timerX) clearInterval(timerX);
+  timerX = startLogoutTimer();
 });

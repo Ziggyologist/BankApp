@@ -248,3 +248,17 @@ details p {
   outline: none;
   cursor: pointer;
 }
+
+@keyframes transition {
+  0% {
+    opacity: 100%;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.transAnimation {
+  animation-name: transition;
+  animation-duration: 1s;
+}
