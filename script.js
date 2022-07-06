@@ -97,7 +97,7 @@ const startLogoutTimer = function () {
     }
     time--;
   };
-  let time = 60;
+  let time = 300;
   tick();
   const timerX = setInterval(tick, 1000);
   return timerX;
@@ -231,6 +231,9 @@ sortBtn.addEventListener("click", function (e) {
   e.preventDefault();
   displayTransactions(currentAcc, !sorted);
   sorted = !sorted;
+});
+
+document.addEventListener("click", function () {
   if (timerX) clearInterval(timerX);
   timerX = startLogoutTimer();
 });
