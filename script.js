@@ -279,12 +279,13 @@ document.addEventListener("click", function () {
 //   acc = currentAcc.currency === "$" ? "€" : "$";
 //   currencyTag.innerHTML = acc;
 // };
-// CONVERT__________
+
+// --------------CONVERT-------------
 
 const convert = function (acc) {
   if (acc.currency === "$") {
     const convertToEUR = acc.transactions.map(
-      transaction => transaction / (1.2).toFixed(2)
+      transaction => transaction / (1.1).toFixed(2)
     );
     acc.currency = "€";
     acc.transactions = convertToEUR;
@@ -292,7 +293,7 @@ const convert = function (acc) {
   } else {
     console.log(acc);
     const convertToUSD = acc.transactions.map(
-      transaction => transaction * (1.2).toFixed(2)
+      transaction => transaction * (1.1).toFixed(2)
     );
     acc.currency = "$";
     acc.transactions = convertToUSD;
@@ -303,3 +304,5 @@ const convert = function (acc) {
 convertBtn.addEventListener("click", function () {
   convert(currentAcc);
 });
+
+// ------------TRANSFER----------------
