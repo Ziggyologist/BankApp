@@ -262,3 +262,44 @@ details p {
   animation-name: transition;
   animation-duration: 1s;
 }
+
+/* OPERATIONS */
+.convertMoneyArea {
+  height: 30%;
+  width: 100%;
+  margin-bottom: 5%;
+  display: flex;
+  border: pink 2px solid;
+  align-items: center;
+  justify-items: center;
+}
+.convertMoneyArea div {
+  margin: 0 auto;
+  /* text-align: center; */
+  /* border: 2px black solid; */
+  /* align-items: center;
+  justify-items: center; */
+}
+
+.convertMoneyArea button {
+  width: 100%;
+  margin: 0 auto;
+  font-size: 1.2rem;
+  padding: 10px;
+  text-align: center;
+  background-color: var(--accent-color);
+  border: none;
+  border-radius: 8px;
+}
+
+.transferMoneyArea {
+  height: 30%;
+  width: 100%;
+  border: blue 2px solid;
+  margin-bottom: 5%;
+}
+.makePaymentArea {
+  height: 30%;
+  width: 100%;
+  border: greenyellow 2px solid;
+}

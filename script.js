@@ -16,6 +16,9 @@ const UImain = document.querySelector("main");
 const sortBtn = document.querySelector(".sort button");
 const timer = document.querySelector(".timer_rundown");
 
+const convertBtn = document.querySelector(".convertMoneyArea button");
+const currencyTag = document.querySelector(".currency");
+
 // EMPTY FIELDS
 greetingPhrase.classList.add("hidden");
 const emptyFields = function () {
@@ -52,6 +55,8 @@ const logout = function (e) {
   UIheader.classList.add("hidden");
   UIheader2.classList.add("hidden");
   UImain.classList.add("hidden");
+  userLogin.value = "";
+  passwordLogin.value = "";
 };
 
 logoutBtn?.addEventListener("click", logout);
@@ -105,18 +110,19 @@ const startLogoutTimer = function () {
 
 // ---DISPLAY BALANCE---
 const displayBalance = function (acc) {
-  const totalBalance = acc.transactions.reduce(
-    (transaction, cur) => cur + transaction,
-    0
-  );
+  const totalBalance = acc.transactions
+    .reduce((transaction, cur) => cur + transaction, 0)
+    .toFixed(2);
   curBalance.textContent = `${totalBalance}${acc.currency}`;
   const totalDeposits = acc.transactions
     .filter(transaction => transaction > 0)
-    .reduce((transaction, cur) => cur + transaction, 0);
+    .reduce((transaction, cur) => cur + transaction, 0)
+    .toFixed(2);
   displayDeposits.textContent = `${totalDeposits}${acc.currency}`;
   const totalWithdrawals = acc.transactions
     .filter(t => t < 0)
-    .reduce((t, cur) => cur + t, 0);
+    .reduce((t, cur) => cur + t, 0)
+    .toFixed(2);
   displayWithdrawals.textContent = `${Math.abs(totalWithdrawals)}${
     acc.currency
   }`;
@@ -156,11 +162,37 @@ const displayBalance = function (acc) {
 
 const displayActivities = function (acc) {};
 
-const displayTransactions = function (acc, sort = false) {
+const displayTransactions = function (acc, sort = false, currency) {
   transactionArea.innerHTML = "";
   const sorted = sort
     ? acc.transactions.slice().sort((a, b) => a - b)
     : acc.transactions;
+  // _______________________
+  console.log(acc.currency);
+  currencyTag.innerHTML = acc.currency === "$" ? "€" : "$";
+
+  // const convert = function (acc) {
+  //   if (acc.currency === "$") {
+  //     const convertToEUR = acc.transactions.map(transaction =>
+  //       Math.trunc(transaction * 0.8)
+  //     );
+  //     acc.currency = "€";
+  //     console.log(convertToEUR + "convert to euro");
+  //   } else {
+  //     console.log(acc);
+  //     const convertToUSD = acc.transactions.map(transaction =>
+  //       Math.trunc(transaction * 1.2)
+  //     );
+  //     acc.currency = "$";
+  //     console.log(`${convertToUSD} converted to USD`);
+  //     console.log(acc.currency);
+  //   }
+  // };
+
+  // convertBtn.addEventListener("click", function () {
+  //   convert(currentAcc);
+  // });
+  // ____________________
 
   sorted.forEach((transaction, i) => {
     const transactionType = transaction >= 0 ? "deposit" : "widthdrawal";
@@ -211,6 +243,7 @@ const login = function (e) {
     userGreet.textContent = `${currentAcc.name}`;
     console.log(`The current account is: ${currentAcc.username}`);
     updateUI(currentAcc);
+    // displayConvert();
   } else {
     alert("The username or password you entered is invalid");
     greetingPhrase.classList.add("hidden");
@@ -236,4 +269,37 @@ sortBtn.addEventListener("click", function (e) {
 document.addEventListener("click", function () {
   if (timerX) clearInterval(timerX);
   timerX = startLogoutTimer();
+});
+
+// OPERATIONS
+
+// COVERT
+
+// const displayConvert = function (acc) {
+//   acc = currentAcc.currency === "$" ? "€" : "$";
+//   currencyTag.innerHTML = acc;
+// };
+// CONVERT__________
+
+const convert = function (acc) {
+  if (acc.currency === "$") {
+    const convertToEUR = acc.transactions.map(
+      transaction => transaction / (1.2).toFixed(2)
+    );
+    acc.currency = "€";
+    acc.transactions = convertToEUR;
+    updateUI(currentAcc);
+  } else {
+    console.log(acc);
+    const convertToUSD = acc.transactions.map(
+      transaction => transaction * (1.2).toFixed(2)
+    );
+    acc.currency = "$";
+    acc.transactions = convertToUSD;
+    updateUI(currentAcc);
+  }
+};
+
+convertBtn.addEventListener("click", function () {
+  convert(currentAcc);
 });
