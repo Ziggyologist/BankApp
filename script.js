@@ -21,6 +21,9 @@ const currencyTag = document.querySelector(".currency");
 const transferTo = document.querySelector(".transferTo");
 const transferAmount = document.querySelector(".transferAmount");
 const transferBtn = document.querySelector(".transferMoneyArea button");
+const paymentBtn = document.querySelector(".makePaymentArea button");
+const paymentReceiver = document.querySelector(".makePayment");
+const paymentAmount = document.querySelector(".paymentAmount");
 
 // EMPTY FIELDS
 greetingPhrase.classList.add("hidden");
@@ -284,9 +287,6 @@ convertBtn.addEventListener("click", function () {
 });
 
 // ------------TRANSFER----------------
-// const transferTo
-// const transferAmount
-// const transferBtn
 
 const transfer = function (acc) {
   const accToTransfer = accounts.find(
@@ -311,4 +311,28 @@ transferBtn.addEventListener("click", function (e) {
   transfer(currentAcc);
   transferTo.value = "";
   transferAmount.value = "";
+});
+
+// -----------PAYMENT------------
+// const paymentBtn = document.querySelector(".makePaymentArea button");
+// const paymentReceiver = document.querySelector(".makePayment");
+// const paymentAmount = document.querySelector(".paymentAmount");
+
+const makePayment = function (acc) {
+  const receiverAccount = paymentReceiver.value;
+  const receiverAmount = Number(paymentAmount.value);
+  if (receiverAccount.length > 3 && receiverAmount > 0) {
+    acc.transactions.push(-receiverAmount);
+    acc.transactionDate.push(new Date().toISOString());
+    updateUI(acc);
+  } else {
+    alert("Please enter a valid name or amount");
+  }
+};
+
+paymentBtn.addEventListener("click", function (e) {
+  e.preventDefault();
+  makePayment(currentAcc);
+  paymentReceiver.value = "";
+  paymentAmount.value = "";
 });

@@ -119,7 +119,7 @@ main {
   display: flex;
   gap: 1rem;
   max-width: 1000px;
-  margin: 2rem auto;
+  margin: 1rem auto;
 }
 
 .operations {
@@ -297,7 +297,8 @@ details p {
   border-radius: 8px;
 }
 
-.transferMoneyArea {
+.transferMoneyArea,
+.opStyle {
   display: flex;
   flex-direction: column;
   /* flex-wrap: nowrap; */
@@ -310,16 +311,20 @@ details p {
   margin-bottom: 5%;
   gap: 10px;
   padding: 5% 5% 5% 5%;
+  text-align: center;
 }
-.transferMoneyArea input::placeholder {
+.transferMoneyArea input::placeholder,
+.makePaymentArea input::placeholder {
   font-size: 0.8rem;
 }
 
-.transferMoneyArea input:focus::placeholder {
+.transferMoneyArea input:focus::placeholder,
+.makePaymentArea input:focus::placeholder {
   color: transparent;
 }
 
-.transferMoneyArea div {
+.transferMoneyArea div,
+.opStyle div {
   display: flex;
   flex-direction: row;
   /* border: 2px solid red; */
@@ -328,11 +333,12 @@ details p {
 .makePaymentArea {
   height: 30%;
   width: 100%;
-  border: greenyellow 2px solid;
+  /* border: greenyellow 2px solid; */
   align-items: center;
 }
 
-.transferMoneyArea input {
+.transferMoneyArea input,
+.opStyle input {
   width: 30%;
   height: 50px;
   font-size: 1.2rem;
@@ -340,7 +346,8 @@ details p {
   border-radius: 8px;
 }
 
-.transferMoneyArea button {
+.transferMoneyArea button,
+.opStyle button {
   width: 30%;
   height: 50px;
   padding: 10px;
@@ -354,7 +361,8 @@ details p {
 }
 
 .transferMoneyArea button:hover,
-.convertMoneyArea button:hover {
+.convertMoneyArea button:hover,
+.makePaymentArea button:hover {
   background-color: #c59811;
   cursor: pointer;
   border: 2px var(--secondary-text-color) solid;
