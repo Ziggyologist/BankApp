@@ -107,7 +107,9 @@ header {
   /* border: 2px #ffc107 dashed; */
   max-width: 1000px;
   margin: 12px auto;
-  margin-bottom: 5vh;
+  /* margin-bottom: 5vh; */
+  padding: 5vh 2vw;
+  background-color: var(--text-primary-color);
 }
 .balance_total {
   font-size: 2rem;
@@ -122,7 +124,7 @@ main {
 
 .operations {
   height: 55vh;
-  border: orange 2px solid;
+  /* border: orange 2px solid; */
   width: 40%;
 }
 
@@ -139,9 +141,11 @@ details p {
   display: flex;
   /* border: yellow 2px solid; */
   margin: 0 auto;
-  gap: 5vw;
+  padding: 3vh 2vw;
+  gap: 4vw;
   max-width: 1000px;
   align-items: baseline;
+  background-color: var(--text-primary-color);
 }
 
 .timer {
@@ -269,9 +273,10 @@ details p {
   width: 100%;
   margin-bottom: 5%;
   display: flex;
-  border: pink 2px solid;
+  /* border: pink 2px solid; */
   align-items: center;
   justify-items: center;
+  background-color: var(--text-primary-color);
 }
 .convertMoneyArea div {
   margin: 0 auto;
@@ -293,10 +298,32 @@ details p {
 }
 
 .transferMoneyArea {
+  display: flex;
+  flex-direction: column;
+  /* flex-wrap: nowrap; */
+  justify-content: center;
+  /* align-items: baseline; */
   height: 30%;
   width: 100%;
-  border: blue 2px solid;
+  /* border: blue 2px solid; */
+  background-color: var(--text-primary-color);
   margin-bottom: 5%;
+  gap: 10px;
+  padding: 5% 5% 5% 5%;
+}
+.transferMoneyArea input::placeholder {
+  font-size: 0.8rem;
+}
+
+.transferMoneyArea input:focus::placeholder {
+  color: transparent;
+}
+
+.transferMoneyArea div {
+  display: flex;
+  flex-direction: row;
+  /* border: 2px solid red; */
+  gap: 10px;
 }
 .makePaymentArea {
   height: 30%;
@@ -305,18 +332,12 @@ details p {
   align-items: center;
 }
 
-.transferMoneyArea {
-  display: flex;
-  flex-direction: row;
-  gap: 10px;
-  padding: 5% 5% 5% 15%;
-  align-items: center;
-}
 .transferMoneyArea input {
   width: 30%;
   height: 50px;
   font-size: 1.2rem;
   text-align: center;
+  border-radius: 8px;
 }
 
 .transferMoneyArea button {
@@ -329,4 +350,13 @@ details p {
   border-radius: 8px;
   font-size: 1.2rem;
   text-align: center;
+  outline: none;
+}
+
+.transferMoneyArea button:hover,
+.convertMoneyArea button:hover {
+  background-color: #c59811;
+  cursor: pointer;
+  border: 2px var(--secondary-text-color) solid;
+  outline: none;
 }

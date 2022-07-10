@@ -3,7 +3,7 @@ const acc1 = {
   surname: "Ralucea",
   username: "teo",
   password: "covor",
-  transactions: [810, 510, -23, -85, -55, 1200, -680],
+  transactions: [810, 510, -23, -85, -55, 1200, -680, -250],
   transactionDate: [
     "2019-01-21T13:15:33.035Z",
     "2019-03-23T07:42:02.383Z",
@@ -22,7 +22,7 @@ const acc2 = {
   surname: "Loxana",
   username: "roxi",
   password: "Moxi",
-  transactions: [1810, -220, -123, -585, -555, 100, -2600],
+  transactions: [1810, -220, -123, -585, -555, 100, -2600, 10],
   transactionDate: [
     "2020-06-21T13:15:33.035Z",
     "2020-03-23T07:42:02.383Z",
@@ -41,7 +41,7 @@ const acc3 = {
   surname: "Ormanistan",
   username: "lili",
   password: "asd",
-  transactions: [6080, 340, 123, 85, -505, 2280, 721],
+  transactions: [6080, 340, 123, 85, -505, 2280, 721, 80],
   transactionDate: [
     "2021-02-21T13:15:33.035Z",
     "2021-02-23T07:42:02.383Z",
@@ -60,7 +60,7 @@ const acc4 = {
   surname: "Andruta",
   username: "vali",
   password: "vvv",
-  transactions: [50, -5, -13, -15, 100, -20, -6],
+  transactions: [50, -5, -13, -15, 100, -20, -6, 22],
   transactionDate: [
     "2019-02-21T13:15:33.035Z",
     "2020-12-23T07:42:02.383Z",
@@ -79,7 +79,7 @@ const acc5 = {
   surname: "Anrel",
   username: "erik",
   password: "123",
-  transactions: [510, -120, 23, -85, -8, 100, -100],
+  transactions: [510, -120, 23, -85, -8, 100, -100, -20],
   transactionDate: [
     "2019-06-21T13:15:33.035Z",
     "2020-03-23T07:42:02.383Z",

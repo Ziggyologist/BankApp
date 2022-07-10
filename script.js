@@ -18,6 +18,9 @@ const timer = document.querySelector(".timer_rundown");
 
 const convertBtn = document.querySelector(".convertMoneyArea button");
 const currencyTag = document.querySelector(".currency");
+const transferTo = document.querySelector(".transferTo");
+const transferAmount = document.querySelector(".transferAmount");
+const transferBtn = document.querySelector(".transferMoneyArea button");
 
 // EMPTY FIELDS
 greetingPhrase.classList.add("hidden");
@@ -38,7 +41,6 @@ const displayLogoutBtn = function (acc) {
   if (currentAcc) {
     document.querySelector(".login_form").classList.add("hidden");
     logoutBtn.classList.remove("hidden");
-    // logoutBtn = document.querySelector(".logout_btn");
   } else {
     document.querySelector(".logout_btn").classList.add("hidden");
     document.querySelector(".login_form").style.opacity = "0";
@@ -171,29 +173,6 @@ const displayTransactions = function (acc, sort = false, currency) {
   console.log(acc.currency);
   currencyTag.innerHTML = acc.currency === "$" ? "€" : "$";
 
-  // const convert = function (acc) {
-  //   if (acc.currency === "$") {
-  //     const convertToEUR = acc.transactions.map(transaction =>
-  //       Math.trunc(transaction * 0.8)
-  //     );
-  //     acc.currency = "€";
-  //     console.log(convertToEUR + "convert to euro");
-  //   } else {
-  //     console.log(acc);
-  //     const convertToUSD = acc.transactions.map(transaction =>
-  //       Math.trunc(transaction * 1.2)
-  //     );
-  //     acc.currency = "$";
-  //     console.log(`${convertToUSD} converted to USD`);
-  //     console.log(acc.currency);
-  //   }
-  // };
-
-  // convertBtn.addEventListener("click", function () {
-  //   convert(currentAcc);
-  // });
-  // ____________________
-
   sorted.forEach((transaction, i) => {
     const transactionType = transaction >= 0 ? "deposit" : "widthdrawal";
     const date = new Date(acc.transactionDate[i]);
@@ -243,13 +222,19 @@ const login = function (e) {
     userGreet.textContent = `${currentAcc.name}`;
     console.log(`The current account is: ${currentAcc.username}`);
     updateUI(currentAcc);
+    document.querySelector(".logout_btn").classList.remove("hidden");
+    document.querySelector(".login_form").style.opacity = "0";
     // displayConvert();
   } else {
     alert("The username or password you entered is invalid");
     greetingPhrase.classList.add("hidden");
+    document.querySelector(".login_form").classList.remove("hidden");
+    document.querySelector(".login_form").style.opacity = 100;
+    document.querySelector(".logout_btn").classList.add("hidden");
+    userLogin.value = "";
+    passwordLogin.value = "";
   }
-  document.querySelector(".logout_btn").classList.remove("hidden");
-  document.querySelector(".login_form").style.opacity = "0";
+
   console.log(userLogin.value, passwordLogin.value);
   if (timerX) clearInterval(timerX);
   timerX = startLogoutTimer();
@@ -272,13 +257,6 @@ document.addEventListener("click", function () {
 });
 
 // OPERATIONS
-
-// COVERT
-
-// const displayConvert = function (acc) {
-//   acc = currentAcc.currency === "$" ? "€" : "$";
-//   currencyTag.innerHTML = acc;
-// };
 
 // --------------CONVERT-------------
 
@@ -306,3 +284,31 @@ convertBtn.addEventListener("click", function () {
 });
 
 // ------------TRANSFER----------------
+// const transferTo
+// const transferAmount
+// const transferBtn
+
+const transfer = function (acc) {
+  const accToTransfer = accounts.find(
+    account => account.username === transferTo.value
+  );
+  if (accToTransfer && transferAmount.value) {
+    console.log(transferAmount.value);
+    accToTransfer.transactions.push(+transferAmount.value);
+    acc.transactions.push(-transferAmount.value);
+    accToTransfer.transactionDate.push(new Date().toISOString());
+    acc.transactionDate.push(new Date().toISOString());
+    updateUI(acc);
+  } else {
+    alert(
+      "The user does not exist or you have not entered a value to transfer"
+    );
+  }
+};
+
+transferBtn.addEventListener("click", function (e) {
+  e.preventDefault();
+  transfer(currentAcc);
+  transferTo.value = "";
+  transferAmount.value = "";
+});
