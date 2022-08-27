@@ -58,8 +58,8 @@ const acc3 = {
 const acc4 = {
   name: "Valerian",
   surname: "Andruta",
-  username: "vali",
-  password: "vvv",
+  username: "john",
+  password: "123",
   transactions: [50, -5, -13, -15, 100, -20, -6, 22],
   transactionDate: [
     "2019-02-21T13:15:33.035Z",
@@ -78,7 +78,7 @@ const acc5 = {
   name: "Erik",
   surname: "Anrel",
   username: "erik",
-  password: "123",
+  password: "asd",
   transactions: [510, -120, 23, -85, -8, 100, -100, -20],
   transactionDate: [
     "2019-06-21T13:15:33.035Z",

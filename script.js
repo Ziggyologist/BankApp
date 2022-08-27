@@ -25,6 +25,9 @@ const paymentBtn = document.querySelector(".makePaymentArea button");
 const paymentReceiver = document.querySelector(".makePayment");
 const paymentAmount = document.querySelector(".paymentAmount");
 
+prompt(
+  `You can log in using the following: \n user:"val" password: "123" \n user: "erik" password: "asd" \n user: "roxi" password: "Moxi" \n Click OK `
+);
 // EMPTY FIELDS
 greetingPhrase.classList.add("hidden");
 const emptyFields = function () {
